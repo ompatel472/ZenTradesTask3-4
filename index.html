@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="login.css" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div class="mydiv">
+      <img src="img/logo.png" alt="" /><br />
+      <form id="loginform" method="POST" action="">
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Username"
+          onblur="validate_email()"
+        />
+        <br />
+        <input
+          type="password"
+          name="pass"
+          id="pass"
+          placeholder="Password"
+        /><br />
+
+        <input
+          type="submit"
+          name="submit"
+          value="Login"
+          onclick="loginclick(event)"
+        />
+        <a
+          href="mailto:support@smartserv.io?subject=Password%20Reset&body=Please%20reset%20my%20password"
+          >Forgot_your_password</a
+        >
+      </form>
+    </div>
+    <script>
+      function validate_email() {
+        var checkemail = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
+        var email = document.getElementById("username").value;
+        console.log(email);
+        if (checkemail.test(email)) {
+          console.log("Valid Email");
+          return true;
+        } else {
+          alert("Invalid Email.");
+          document.getElementById("username").value = "";
+          return false;
+        }
+      }
+
+      function validate_pass() {
+        var checkpass = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@]*$/;
+        var pass = document.getElementById("pass").value;
+        console.log(pass);
+        if (checkpass.test(pass)) {
+          console.log("Valid Password");
+          return true;
+        } else {
+          alert(
+            "Invalid Password. Please enter password with at least 1 Capital letter and at least 1 number"
+          );
+          document.getElementById("pass").value = "";
+          return false;
+        }
+      }
+
+      function loginclick(event) {
+        event.preventDefault();
+        console.log("Submit");
+        if (validate_email() && validate_pass()) {
+          window.location.href = "dashboard.html";
+        }
+      }
+    </script>
+  </body>
+</html>
